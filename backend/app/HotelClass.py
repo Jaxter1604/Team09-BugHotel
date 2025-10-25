@@ -1,7 +1,7 @@
 from RoomClass import Room
 
 class Hotel:
-    def __init__(self, rows=6, cols=5):
+    def __init__(self, rows=7, cols=5):
         self.rows = rows
         self.cols = cols
         self.grid = []
@@ -17,14 +17,14 @@ class Hotel:
                 else:
                     environment = "OVERGROUND"
 
-                edge_distance = min(row, column, self.rows - 1 - row, self.cols - 1 - column)
-                max_edge_distance = (min(self.rows, self.cols) // 2)
-                if max_edge_distance == 0:
-                    accessibility = 10
-                elif environment == "UNDERGROUND":
-                    accessibility = 0
+                if environment == "UNDERGROUND":
+                    accessibility = -1
                 else:
-                    accessibility = round(10 * (1 - edge_distance / max_edge_distance))
+                    # Number of above-ground floors (excluding underground)
+                    above_ground_floors = self.rows - 1
+
+                    # Scale so that top floor = 0 and ground floor = 10
+                    accessibility = round(10 * (row / (above_ground_floors - 1)))
 
                 roomNo = roomNo + 1
 

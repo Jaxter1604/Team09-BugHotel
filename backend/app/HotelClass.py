@@ -1,4 +1,5 @@
 from RoomClass import Room
+from BugClass import Bug
 
 class Hotel:
     def __init__(self, rows=7, cols=5):
@@ -6,6 +7,9 @@ class Hotel:
         self.cols = cols
         self.grid = []
         self.create_grid()
+
+    def add_bug_to_room(self, newOccupant: Bug, row_index, column_index):
+        self.grid[row_index][column_index].occupiedBy = newOccupant
 
     def create_grid(self):
         roomNo = 0
@@ -28,7 +32,7 @@ class Hotel:
 
                 roomNo = roomNo + 1
 
-                room = Room(size=10, environment=environment, accessibility=accessibility, occupied=[], cost=100, position=[row, column], roomNo=roomNo)
+                room = Room(size=10, environment=environment, accessibility=accessibility, cost=100, position=[row, column], roomNo=roomNo)
                 row_list.append(room)
             self.grid.append(row_list)
 

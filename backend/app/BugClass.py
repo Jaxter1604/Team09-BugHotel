@@ -6,8 +6,8 @@ class PreyOrPreditor(Enum):
     PREY = auto()
 
 class Environment(Enum):
-    UNDERGROUND = "Underground"
-    OVERGROUND = "Overground" 
+    UNDERGROUND = auto()
+    OVERGROUND = auto() 
 
 class Bug:
     def __init__(self, species: str, budget: int, preyOrPredator:PreyOrPreditor, canFly: bool, agression: int, preferredEnvironment:Environment, size: int):

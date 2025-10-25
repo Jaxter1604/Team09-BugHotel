@@ -1,0 +1,14 @@
+#bugSprite {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    margin-left: 35px;
+}
+
+.sprite {
+    image-rendering: pixelated;
+}
+
+#bugImg {
+    position: relative;
+}

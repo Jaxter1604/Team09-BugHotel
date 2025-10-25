@@ -9,7 +9,7 @@ def createRoom(roomNumber):
         case 3:
             pass
    
-class Bug:
+class Room:
     def __init__(self, size: int, environment: Environment, accessibility: int, occupied: [], cost: int):
         self.size = size
         self.environment = environment

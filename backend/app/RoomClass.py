@@ -1,3 +1,4 @@
+from BugClass import Bug
 from enum import Enum, auto
 
 class Environment(Enum):
@@ -10,11 +11,11 @@ def createRoom(roomNumber):
             pass
    
 class Room:
-    def __init__(self, size: int, environment: Environment, accessibility: int, occupied: [], cost: int, position: [], roomNo: int):
+    def __init__(self, size: int, environment: Environment, accessibility: int, cost: int, position: [], roomNo: int):
         self.size = size
         self.environment = environment
         self.accessibility = accessibility
-        self.occupied = occupied
+        self.occupiedBy = None
         self.cost = cost
         self.position = position
         self.roomNo = roomNo

@@ -45,19 +45,21 @@ class Hotel:
                 print(room.roomNo, end="  ")
             print()
 
-    def print_room(self, row, col):
-        if 0 <= row < self.rows and 0 <= col < self.cols:
-            room = self.grid[row][col]
-            print(f"Room at ({row}, {col}):")
-            print(f"  Environment: {room.environment}")
-            print(f"  Accessibility: {room.accessibility}")
-            print(f"  Size: {room.size}")
-            print(f"  Cost: {room.cost}")
-            print(f"  Occupied: {room.occupied}")
-            print(f"  Room number: {room.roomNo}")
-        else:
-            print("Invalid room coordinates.")
+    def print_room(self, room_number):
+        # Find the room with the matching room number
+        for row in self.grid:
+            for room in row:
+                if room.roomNo == room_number:
+                    print(f"Room number {room.roomNo}:")
+                    print(f"  Environment: {room.environment}")
+                    print(f"  Accessibility: {room.accessibility}")
+                    print(f"  Size: {room.size}")
+                    print(f"  Cost: {room.cost}")
+                    print(f"  Occupied: {room.occupied}")
+                    print(f"  Position: {room.position}")
+                    return
+        print("Invalid room number.")
 
 Hotel().print_grid()
-Hotel().print_room(1,2)
+Hotel().print_room(12)
 Hotel().print_grid_numbers()

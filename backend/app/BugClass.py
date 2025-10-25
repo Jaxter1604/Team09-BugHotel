@@ -17,6 +17,48 @@ class Bug:
         self.prefferedEnvironment = preferredEnvironment
         self.agression = agression
         self.size = size
+    
+    def genRandomBug():
+        Bugs = [Ant,Beetle,Fly,Worm,
+        Bee,Wasp,Caterpillar,Butterfly,
+        Moth,Grasshopper,Mosquito,Spider]
+
+        BugNum = random.randrange(0,12)
+
+        return Bugs[BugNum]
+        
+
+    def GetSpecificBug(bugname):
+        match bugname:
+            case "Spider":
+                return Spider
+            case "Ant":
+                return Ant
+            case "Beetle":
+                return Beetle
+            case "Fly":
+                return Fly
+            case "Worm":
+                return Worm
+            case "Bee":
+                return Bee
+            case "Wasp":
+                return Wasp
+            case "Caterpillar":
+                return Caterpillar
+            case "Butterfly":
+                return Butterfly
+            case "Moth":
+                return Moth
+            case "Grasshopper":
+                return Grasshopper
+            case "Mosquito":
+                return Mosquito
+            
+        
+    
+
+
 
 class Spider(Bug):
     def __init__(self):

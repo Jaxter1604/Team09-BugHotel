@@ -1,5 +1,6 @@
 from RoomClass import Room
 from BugClass import Bug
+from HappinessCalc import CalcHappiness
 
 class Hotel:
     def __init__(self, rows=7, cols=5):
@@ -9,7 +10,49 @@ class Hotel:
         self.create_grid()
 
     def add_bug_to_room(self, newOccupant: Bug, row_index, column_index):
-        self.grid[row_index][column_index].occupiedBy = newOccupant
+        room = self.grid[row_index][column_index]
+        if room.occupiedBy is not None:
+            print("Room already occupied")
+            return False
+
+        room.occupiedBy = newOccupant
+        print(f"{newOccupant.species} added to Room {room.roomNo}")
+
+        self.recalc_all_happiness()
+
+        print("\nUpdated bug happiness values:")
+        for row in self.grid:
+            for room in row:
+                if room.occupiedBy:
+                    print(f"  {room.occupiedBy.species} in Room {room.roomNo} -> Happiness: {room.occupiedBy.happiness}")
+        return True
+
+    def recalc_all_happiness(self):
+        for row in self.grid:
+            for room in row:
+                if room.occupiedBy:
+                    bug = room.occupiedBy
+                    bug.happiness = CalcHappiness(bug, room)
+
+    def FinalAverage(self):
+        total = 0
+        count = 0
+        for row in self.grid:
+            for room in row:
+                if room.occupiedBy:
+                    total += room.occupiedBy.happiness
+                    count += 1
+
+        if count == 0:
+            return 0
+        return total / count
+
+    def find_room_coords(self, room_num):
+        for row_index, row in enumerate(self.grid):
+            for col_index, room in enumerate(row):
+                if room.roomNo == room_num:
+                    return [row_index, col_index]
+
 
     def create_grid(self):
         roomNo = 0
@@ -59,11 +102,13 @@ class Hotel:
                     print(f"  Accessibility: {room.accessibility}")
                     print(f"  Size: {room.size}")
                     print(f"  Cost: {room.cost}")
-                    print(f"  Occupied: {room.occupied}")
+                    print(f"  Occupied: {room.occupiedBy}")
                     print(f"  Position: {room.position}")
                     return
         print("Invalid room number.")
 
+"""
 Hotel().print_grid()
 Hotel().print_room(12)
 Hotel().print_grid_numbers()
+"""

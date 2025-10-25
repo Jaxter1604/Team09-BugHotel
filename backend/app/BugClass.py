@@ -2,12 +2,12 @@ from enum import Enum, auto
 import random
 
 class PreyOrPredator(Enum):
-    PREDATOR = auto()
-    PREY = auto()
+    PREDATOR = "Predator"
+    PREY = "Prey"
 
 class Environment(Enum):
-    UNDERGROUND = auto()
-    OVERGROUND = auto() 
+    UNDERGROUND = "Underground"
+    OVERGROUND = "Overground"
 
 class Bug:
     def __init__(self, species: str, budget: int, preyOrPredator:PreyOrPredator, canFly: bool, agression: int, preferredEnvironment:Environment, size: int):
@@ -66,7 +66,7 @@ class Spider(Bug):
             agression=10,
             canFly=False,
             size=size,
-            preferredEnvironment=Environment
+            preferredEnvironment=Environment.OVERGROUND
         )
 
 class Ant(Bug):

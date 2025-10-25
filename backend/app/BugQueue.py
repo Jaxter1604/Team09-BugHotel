@@ -26,7 +26,8 @@ def generate_queue(num_bugs: int, pred_ratio: float = 0.25):
     return bug_queue
 
 
-"""test code"""
+"""test code
 bugs_list = generate_queue(35)
 for bug in bugs_list:
     print(f"{bug.species}: {bug.preyOrPredator}, CanFly: {bug.canFly}, Aggression: {bug.agression}, Size: {bug.size}, PreferredEnv: {bug.prefferedEnvironment}")
+"""

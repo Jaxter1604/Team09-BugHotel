@@ -1,4 +1,4 @@
-from enum import Enum
+from enum import Enum, auto
 import random
 
 class PreyOrPreditor(Enum):
@@ -10,12 +10,12 @@ class Environment(Enum):
     OVERGROUND = "Overground" 
 
 class Bug:
-    def __init__(self, species: str, budget: int, preyOrPredator, agression: int, canFly: bool, preferredEnvironment, size: int):
+    def __init__(self, species: str, budget: int, preyOrPredator:PreyOrPreditor, canFly: bool, agression: int, preferredEnvironment:Environment, size: int):
         self.species = species
         self.budget = budget
         self.preyOrPredator = preyOrPredator
+        self.prefferedEnvironment = preferredEnvironment
         self.agression = agression
-        self.canFly = canFly
         self.size = size
 
 class Spider(Bug):
@@ -23,11 +23,11 @@ class Spider(Bug):
         budget = random.randrange(50,201,10)
         size = random.randrange(6,10)
         super().__init__(
-            species=Spider,
+            species="Spider",
             budget=budget,
             preyOrPredator=PreyOrPreditor.PREDATOR,
             agression=10,
             canFly=False,
             size=size,
-            preferredEnvironment=Environment.OVERGROUND
+            preferredEnvironment=Environment
         )

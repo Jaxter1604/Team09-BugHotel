@@ -36,4 +36,17 @@ class Hotel:
                 print(f"{env_symbol}:{room.accessibility:3d}", end="  ")
             print()
 
+    def print_room(self, row, col):
+        if 0 <= row < self.rows and 0 <= col < self.cols:
+            room = self.grid[row][col]
+            print(f"Room at ({row}, {col}):")
+            print(f"  Environment: {room.environment}")
+            print(f"  Accessibility: {room.accessibility}")
+            print(f"  Size: {room.size}")
+            print(f"  Cost: {room.cost}")
+            print(f"  Occupied: {room.occupied}")
+        else:
+            print("Invalid room coordinates.")
+
 Hotel().print_grid()
+Hotel().print_room(1,2)

@@ -1,7 +1,7 @@
 from enum import Enum, auto
 import random
 
-class PreyOrPreditor(Enum):
+class PreyOrPredator(Enum):
     PREDATOR = auto()
     PREY = auto()
 
@@ -10,9 +10,10 @@ class Environment(Enum):
     OVERGROUND = auto() 
 
 class Bug:
-    def __init__(self, species: str, budget: int, preyOrPredator:PreyOrPreditor, canFly: bool, agression: int, preferredEnvironment:Environment, size: int):
+    def __init__(self, species: str, budget: int, preyOrPredator:PreyOrPredator, canFly: bool, agression: int, preferredEnvironment:Environment, size: int):
         self.species = species
         self.budget = budget
+        self.canFly = canFly
         self.preyOrPredator = preyOrPredator
         self.prefferedEnvironment = preferredEnvironment
         self.agression = agression
@@ -61,7 +62,7 @@ class Spider(Bug):
         super().__init__(
             species="Spider",
             budget=budget,
-            preyOrPredator=PreyOrPreditor.PREDATOR,
+            preyOrPredator=PreyOrPredator.PREDATOR,
             agression=10,
             canFly=False,
             size=size,
@@ -75,7 +76,7 @@ class Ant(Bug):
         super().__init__(
             species="Ant",
             budget=budget,
-            preyOrPredator=PreyOrPreditor.PREY,
+            preyOrPredator=PreyOrPredator.PREY,
             agression=3,
             canFly=False,
             size=size,
@@ -89,7 +90,7 @@ class Beetle(Bug):
         super().__init__(
             species="Beettle",
             budget=budget,
-            preyOrPredator=PreyOrPreditor.PREY,
+            preyOrPredator=PreyOrPredator.PREY,
             agression=2,
             canFly=random.choice([True, False]),
             size=size,
@@ -103,7 +104,7 @@ class Fly(Bug):
         super().__init__(
             species="Fly",
             budget=budget,
-            preyOrPredator=PreyOrPreditor.PREY,
+            preyOrPredator=PreyOrPredator.PREY,
             agression=1,
             canFly=True,
             size=size,
@@ -117,7 +118,7 @@ class Worm(Bug):
         super().__init__(
             species="Worm",
             budget=budget,
-            preyOrPredator=PreyOrPreditor.PREY,
+            preyOrPredator=PreyOrPredator.PREY,
             agression=1,
             canFly=False,
             size=size,
@@ -131,7 +132,7 @@ class Bee(Bug):
         super().__init__(
             species="Bee",
             budget=budget,
-            preyOrPredator=PreyOrPreditor.PREY,
+            preyOrPredator=PreyOrPredator.PREY,
             agression=5,
             canFly=True,
             size=size,
@@ -145,7 +146,7 @@ class Wasp(Bug):
         super().__init__(
             species="Wasp",
             budget=budget,
-            preyOrPredator=PreyOrPreditor.PREDATOR,
+            preyOrPredator=PreyOrPredator.PREDATOR,
             agression=7,
             canFly=True,
             size=size,
@@ -159,7 +160,7 @@ class Caterpillar(Bug):
         super().__init__(
             species="Caterpillar",
             budget=budget,
-            preyOrPredator=PreyOrPreditor.PREY,
+            preyOrPredator=PreyOrPredator.PREY,
             agression=2,
             canFly=False,
             size=size,
@@ -173,7 +174,7 @@ class Butterfly(Bug):
         super().__init__(
             species="Butterfly",
             budget=budget,
-            preyOrPredator=PreyOrPreditor.PREY,
+            preyOrPredator=PreyOrPredator.PREY,
             agression=1,
             canFly=True,
             size=size,
@@ -187,7 +188,7 @@ class Moth(Bug):
         super().__init__(
             species="Moth",
             budget=budget,
-            preyOrPredator=PreyOrPreditor.PREY,
+            preyOrPredator=PreyOrPredator.PREY,
             agression=3,
             canFly=True,
             size=size,
@@ -201,7 +202,7 @@ class Grasshopper(Bug):
         super().__init__(
             species="Grasshopper",
             budget=budget,
-            preyOrPredator=PreyOrPreditor.PREDATOR,
+            preyOrPredator=PreyOrPredator.PREDATOR,
             agression=9,
             canFly=False,
             size=size,
@@ -215,7 +216,7 @@ class Mosquito(Bug):
         super().__init__(
             species="Mosquito",
             budget=budget,
-            preyOrPredator=PreyOrPreditor.PREDATOR,
+            preyOrPredator=PreyOrPredator.PREDATOR,
             agression=10,
             canFly=True,
             size=size,

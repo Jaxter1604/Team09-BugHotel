@@ -1,8 +1,8 @@
-from enum import Enum
+from enum import Enum, auto
 
 class PreyOrPreditor(Enum):
-    PREDATOR
-    PREY
+    PREDATOR = auto()
+    PREY = auto()
 
 class Environment(Enum):
     UNDERGROUND

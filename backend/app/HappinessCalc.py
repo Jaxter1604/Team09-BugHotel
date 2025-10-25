@@ -19,6 +19,17 @@ def CalcHappiness():
         happiness = 5 * budget * size * agro * access
     else:
         happiness = 5 * budget * size * agro * access - 2
+
+    return happiness
     
 def CalcHotelHappiness():
-    for i in range()
+    for i in range(1,36):
+        if Room().occupiedBy:
+            Room().occupiedBy().CalcHappiness()
+
+def FinalAverage(num_bugs: int):
+    total = 0
+    for i in range(1,36):
+        if Room().occupiedBy:
+            total += Room().occupiedBy().happiness
+    return total/num_bugs

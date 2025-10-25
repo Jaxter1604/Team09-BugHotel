@@ -15,7 +15,7 @@ export default function Bug({spriteURL, spriteClock, mode}: spriteProps) {
         <>
             <div style={{width: "35px", height: "35px"}}>
                     <div id="bugSprite">
-                        <img src={spriteURL} id="bugImg" class="sprite" style={{right: px + 'px'}} />
+                        <img src={spriteURL} id="bugImg" className="sprite" style={{right: px + 'px'}} />
                     </div>
             </div>
         </>

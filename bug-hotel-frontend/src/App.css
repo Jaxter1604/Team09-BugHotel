@@ -12,3 +12,23 @@
 #bugImg {
     position: relative;
 }
+
+#navbar {
+    background-color: #ECAD85;
+    height: 55px;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+#navbarBox {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    justify-content: space-between;
+    padding: 8px;
+}
+
+.flex {
+    display: flex;
+}

@@ -8,6 +8,7 @@ class Hotel:
         self.create_grid()
 
     def create_grid(self):
+        roomNo = 0
         for row in range(self.rows):
             row_list = []
             for column in range(self.cols):
@@ -25,7 +26,9 @@ class Hotel:
                 else:
                     accessibility = round(10 * (1 - edge_distance / max_edge_distance))
 
-                room = Room(size=10, environment=environment, accessibility=accessibility, occupied=[], cost=100, position=[row, column])
+                roomNo = roomNo + 1
+
+                room = Room(size=10, environment=environment, accessibility=accessibility, occupied=[], cost=100, position=[row, column], roomNo=roomNo)
                 row_list.append(room)
             self.grid.append(row_list)
 
@@ -34,6 +37,12 @@ class Hotel:
             for room in row:
                 env_symbol = "U" if room.environment == "UNDERGROUND" else "O"
                 print(f"{env_symbol}:{room.accessibility:3d}", end="  ")
+            print()
+
+    def print_grid_numbers(self):
+        for row in self.grid:
+            for room in row:
+                print(room.roomNo, end="  ")
             print()
 
     def print_room(self, row, col):
@@ -45,8 +54,10 @@ class Hotel:
             print(f"  Size: {room.size}")
             print(f"  Cost: {room.cost}")
             print(f"  Occupied: {room.occupied}")
+            print(f"  Room number: {room.roomNo}")
         else:
             print("Invalid room coordinates.")
 
 Hotel().print_grid()
 Hotel().print_room(1,2)
+Hotel().print_grid_numbers()

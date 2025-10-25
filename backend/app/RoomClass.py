@@ -10,10 +10,11 @@ def createRoom(roomNumber):
             pass
    
 class Room:
-    def __init__(self, size: int, environment: Environment, accessibility: int, occupied: [], cost: int, position: []):
+    def __init__(self, size: int, environment: Environment, accessibility: int, occupied: [], cost: int, position: [], roomNo: int):
         self.size = size
         self.environment = environment
         self.accessibility = accessibility
         self.occupied = occupied
         self.cost = cost
         self.position = position
+        self.roomNo = roomNo

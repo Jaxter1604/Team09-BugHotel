@@ -2,6 +2,8 @@ import '../App.css'
 import Bug from '../components/Bug.tsx'
 import {useState, useEffect} from 'react'
 
+import Simulation from '../components/SimulatorBox.tsx'
+
 //All sprites
 import ant from '../assets/static/media/sprites/ant.png'
 import beetle from '../assets/static/media/sprites/beetle.png'
@@ -31,19 +33,7 @@ export default function Main() {
       })
     return (
         <>
-            <p>Bug Hotel WIP Frontend</p>
-            <Bug spriteURL={ant} spriteClock={spriteClock} mode={0} />
-            <Bug spriteURL={beetle} spriteClock={spriteClock} mode={0} />
-            <Bug spriteURL={fly} spriteClock={spriteClock} mode={0} />
-            <Bug spriteURL={worm} spriteClock={spriteClock} mode={0} />
-            <Bug spriteURL={bee} spriteClock={spriteClock} mode={0} />
-            <Bug spriteURL={wasp} spriteClock={spriteClock} mode={0} />
-            <Bug spriteURL={caterpiller} spriteClock={spriteClock} mode={0} />
-            <Bug spriteURL={butterfly} spriteClock={spriteClock} mode={0} />
-            <Bug spriteURL={moth} spriteClock={spriteClock} mode={0} />
-            <Bug spriteURL={grasshopper} spriteClock={spriteClock} mode={0} />
-            <Bug spriteURL={mosquito} spriteClock={spriteClock} mode={0} />
-            <Bug spriteURL={spider} spriteClock={spriteClock} mode={0} />
+            <Simulation/>
         </>
     )
 }

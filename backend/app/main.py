@@ -9,17 +9,6 @@ MAX_BUGS = 35
 app = FastAPI(title="Bug Hotel")
 
 def game():
-    
-    @app("/queue")
-    def get_queue():    
-        queue_list = []
-        fn_current_bug = currentBug #don't want to screw over main loop's iteration
-        queue_list.append(fn_current_bug)
-        index = 0
-        while (fn_current_bug := fn_current_bug.next and i <= MAX_BUGS):
-            queue_list.append(currentBug.species)
-        return {"queue" : queue_list}
-
     hotel = Hotel()
     bugs = generate_queue(MAX_BUGS)
 

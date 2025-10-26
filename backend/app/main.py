@@ -46,22 +46,22 @@ def get_queue():
             "prefferedEnvironment" : fn_current_bug.value.prefferedEnvironment,
             "agression" : fn_current_bug.value.prefferedEnvironment,
             "size" : fn_current_bug.value.size,
-            "roomNo" : fn_current_bug.room_num
+            "roomNo" : fn_current_bug.value.roomNo
             })
         fn_current_bug = fn_current_bug.next
 
     return {"queue" : queue_list}
 
-async def get_console_input():
-    loop = asyncio.get_running_loop()
-    return await loop.run_in_executor(None, lambda: input("Enter room, bitch"))
+def get_console_input():
+    return input("Enter room, bitch")
 
 @app.on_event("startup")
 async def start_game():
-    room_num = await asyncio.create_task(game())
+    thread = threading.Thread(target=game, daemon=True)
+    thread.start()
     
 
-async def game():
+def game():
 
     hotel = Hotel()
 
@@ -80,12 +80,13 @@ async def game():
             try:
                 print("getting input")
 
-                room_num = threading.Thread(target=get_room_num, daemon=True)
+                room_num = get_console_input()
 
                 room_coords = hotel.find_room_coords(int(room_num))
-                asyncio.sleep(0.1)
+
                 if hotel.add_bug_to_room(currentBug.value, room_coords[0], room_coords[1]):
                     currentBug.roomNo = room_num
+                    break
             except ValueError:
                 print("Please enter a room number between 1 and 35, that is not occupied")
         currentBug=currentBug.next
@@ -93,5 +94,3 @@ async def game():
     final = hotel.FinalAverage()
     print(f"\n Your final score is {final}")
     
-
-game()

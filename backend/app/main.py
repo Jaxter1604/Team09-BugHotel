@@ -6,8 +6,7 @@ from HotelClass import Hotel
 from RoomClass import Room
 from BugQueue import generate_queue
 from fastapi.middleware.cors import CORSMiddleware
-import aioconsole
-from time import sleep
+import threading
 
 MAX_BUGS = 35
 
@@ -27,10 +26,35 @@ app.add_middleware(
 
 
 async def get_room_num():
-    room_num = await aioconsole.ainput("Enter room number\n")
+    room_num = input("Enter room number:\n")
     return room_num
 
+bugs = generate_queue(MAX_BUGS)
+currentBug = bugs.head
 
+@app.get("/queue")
+def get_queue():    
+    queue_list = []
+    global currentBug #don't want to screw over main loop's iteration
+    fn_current_bug = currentBug 
+    while (fn_current_bug != None):
+        queue_list.append({
+            "species" : fn_current_bug.value.species,
+            "budget" : fn_current_bug.value.budget,
+            "canFly" : fn_current_bug.value.canFly,
+            "preyOrPredator" : fn_current_bug.value.preyOrPredator,
+            "prefferedEnvironment" : fn_current_bug.value.prefferedEnvironment,
+            "agression" : fn_current_bug.value.prefferedEnvironment,
+            "size" : fn_current_bug.value.size,
+            "roomNo" : fn_current_bug.room_num
+            })
+        fn_current_bug = fn_current_bug.next
+
+    return {"queue" : queue_list}
+
+async def get_console_input():
+    loop = asyncio.get_running_loop()
+    return await loop.run_in_executor(None, lambda: input("Enter room, bitch"))
 
 @app.on_event("startup")
 async def start_game():
@@ -39,35 +63,11 @@ async def start_game():
 
 async def game():
 
-    @app.get("/queue")
-    def get_queue():    
-        queue_list = []
-        fn_current_bug = currentBug #don't want to screw over main loop's iteration
-        while (fn_current_bug != None):
-            queue_list.append({
-                "species" : fn_current_bug.value.species,
-                "budget" : fn_current_bug.value.budget,
-                "canFly" : fn_current_bug.value.canFly,
-                "preyOrPredator" : fn_current_bug.value.preyOrPredator,
-                "prefferedEnvironment" : fn_current_bug.value.prefferedEnvironment,
-                "agression" : fn_current_bug.value.prefferedEnvironment,
-                "size" : fn_current_bug.value.size,
-                "roomNo" : fn_current_bug.room_num
-                })
-            fn_current_bug = fn_current_bug.next
-
-        return {"queue" : queue_list}
-
-    @app.get("/score")
-    def get_score():
-        return {"score": hotel.FinalAverage()}
-
     hotel = Hotel()
-    bugs = generate_queue(MAX_BUGS)
 
     hotel.print_grid_numbers()
 
-    currentBug=bugs.head
+    global currentBug 
     while currentBug:
         print(f"\nNext bug: {currentBug.value.species}")
         print(f"    Budget: {currentBug.value.budget}")
@@ -80,7 +80,7 @@ async def game():
             try:
                 print("getting input")
 
-                room_num = await get_room_num()
+                room_num = threading.Thread(target=get_room_num, daemon=True)
 
                 room_coords = hotel.find_room_coords(int(room_num))
                 asyncio.sleep(0.1)

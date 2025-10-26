@@ -19,7 +19,7 @@ export default function Bug({spriteURL, spriteClock, mode, x, y}: spriteProps) {
     const newx=useRef(-1)
     const newy=useRef(-1)
 
-    var scaleVal:string="scale(1)"
+    let scaleVal:string="scale(1)"
 
     useEffect(() => {
         //Just created, initialise and don't edit until x or y is different
@@ -34,15 +34,16 @@ export default function Bug({spriteURL, spriteClock, mode, x, y}: spriteProps) {
             }
         } else {
         //System to move bugs incremently to new x,y coordinate. First go to x coordinate then y coordinate.
-            if (newy.current>yOffset-y) {
+            if (newy.current<yOffset-y){
                 scaleVal="scale(-1,1)"
                 mode=1
-                console.log("d")
-                if ((newy.current-speed)<yOffset-y){
+                console.log("c")
+                if ((newy.current+speed)>yOffset-y){
                     newy.current=(yOffset-y)
                 } else {
-                    newy.current=(newy.current-speed)
-            }} else if (newx.current<x){
+                    newy.current=(newy.current+speed)
+                }
+            } else if (newx.current<x){
                 mode=1
                 scaleVal="scale(1)"
                 console.log("a")
@@ -60,18 +61,19 @@ export default function Bug({spriteURL, spriteClock, mode, x, y}: spriteProps) {
                 } else {
                     newx.current=(newx.current-speed)
                 }
-            } else if (newy.current<yOffset-y){
+            } else if (newy.current>yOffset-y) {
                 scaleVal="scale(1)"
                 mode=1
-                console.log("c")
-                if ((newy.current+speed)>yOffset-y){
+                console.log("d")
+                if ((newy.current-speed)<yOffset-y){
                     newy.current=(yOffset-y)
                 } else {
-                    newy.current=(newy.current+speed)
+                    newy.current=(newy.current-speed)
                 }
             }
         }
     });
+
     console.log(scaleVal)
     const px:number=(35*2*(spriteClock))+(35*4*mode)
     return (

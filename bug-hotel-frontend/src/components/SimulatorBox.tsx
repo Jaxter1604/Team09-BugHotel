@@ -53,7 +53,7 @@ interface addNewBugProps {
 
 export function addNewBug({uniqueID,bug,x,y}:addNewBugProps) {
   bugElements[uniqueID]=({bug:bug,x:x,y:y})
-}
+} //When a bug first gets initialised in the Fast API code crew, this is what should eventually be called to visually represent them.
 
 interface setBugIntegerVariableProps {
   uniqueID: number,
@@ -63,9 +63,4 @@ interface setBugIntegerVariableProps {
 
 export function setBugIntegerVariable({uniqueID,variable,newValue}:setBugIntegerVariableProps){
   bugElements[uniqueID][variable]=newValue
-}
-
-addNewBug({uniqueID:1,bug:"Ant",x:100,y:0})
-addNewBug({uniqueID:2,bug:"Butterfly",x:65,y:0})
-addNewBug({uniqueID:3,bug:"Bee",x:30,y:0})
-addNewBug({uniqueID:4,bug:"Beetle",x:-5,y:0})
+} //Function to control their movement, how they move is coded elsewhere.

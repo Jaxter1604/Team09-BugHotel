@@ -1,5 +1,5 @@
 export default async function getHotelJSON() {
-    let response = await fetch("http://localhost:8000/hotel");
+    let response = await fetch("/hotel");
 
     if (!response.ok) {
         throw new Error(`Response status ${response.status}`);
@@ -8,3 +8,5 @@ export default async function getHotelJSON() {
     const hotelData = await response.json();
     return hotelData;    
 }
+
+console.log(await getHotelJSON())

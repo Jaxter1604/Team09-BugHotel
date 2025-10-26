@@ -12,7 +12,23 @@ app = FastAPI(title="Bug Hotel")
 app.state.room_num = None
 app.state.input_event = asyncio.Event()
 
-@app.post("/user_input")
+origins = [
+    "http://localhost.tiangolo.com",
+    "https://localhost.tiangolo.com",
+    "http://localhost",
+    "http://localhost:8080",
+    "http://localhost:5173"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
 async def get_room_num(request: Request):
     data = await request.json()
     room_num = app.state.room_num = data.get("room_num")

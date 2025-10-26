@@ -20,6 +20,8 @@ export default function Simulation() {
           const [spriteClock,setSpriteClock] = useState(0)
           useEffect(() => {
             const interval = setInterval(() => {
+                parseQueue()
+
               if (spriteClock==0){
                 setSpriteClock(1)
               } else {
@@ -71,11 +73,17 @@ export function setBugIntegerVariable({uniqueID,variable,newValue}:setBugInteger
 export async function parseQueue(){
     const data = await getQueueArray()
     for (let i=0;i<data.length;i++){
-        console.log(data[i])
+        addNewBug({uniqueID:i,bug:data[i].species,x:(100-(35*i)),y:0})
     }
 }
 
-addNewBug({uniqueID:1,bug:"Caterpillar",x:0,y:0})
-setBugIntegerVariable({uniqueID:1,variable:"x",newValue: 300})
-setBugIntegerVariable({uniqueID:1,variable:"y",newValue: 350})
-parseQueue()
+interface roomNumberToPosProps {
+    roomNumber:number
+}
+
+function roomNumberToPos({roomNumber}:roomNumberToPosProps){
+    return [480-(80*(((roomNumber-1)%5)+1)),(7-65)+65*(Math.floor(roomNumber/7))]
+}
+
+
+addNewBug({uniqueID:100,bug:"Beetle",x:(480),y:(7)})

@@ -7,6 +7,7 @@ class Hotel:
         self.rows = rows
         self.cols = cols
         self.grid = []
+        self.max_room_num = None
         self.create_grid()
 
     def add_bug_to_room(self, newOccupant: Bug, row_index, column_index):
@@ -78,6 +79,7 @@ class Hotel:
                 room = Room(size=10, environment=environment, accessibility=accessibility, cost=100, position=[row, column], roomNo=roomNo)
                 row_list.append(room)
             self.grid.append(row_list)
+        self.max_room_num = roomNo
 
     def print_grid(self):
         for row in self.grid:

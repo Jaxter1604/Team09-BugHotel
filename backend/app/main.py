@@ -30,12 +30,19 @@ async def game():
     def get_queue():    
         queue_list = []
         fn_current_bug = currentBug #don't want to screw over main loop's iteration
-        queue_list.append(fn_current_bug.value.species)
-        print(fn_current_bug)
         index = 0
         while (fn_current_bug != None and index <= MAX_BUGS):
+            queue_list.append({
+                "species" : fn_current_bug.value.species,
+                "budget" : fn_current_bug.value.budget,
+                "canFly" : fn_current_bug.value.canFly,
+                "preyOrPredator" : fn_current_bug.value.preyOrPredator,
+                "prefferedEnvironment" : fn_current_bug.value.prefferedEnvironment,
+                "agression" : fn_current_bug.value.prefferedEnvironment,
+                "size" : fn_current_bug.value.size
+                })
             fn_current_bug = fn_current_bug.next
-            queue_list.append(currentBug.value.species)
+
         return {"queue" : queue_list}
 
     hotel = Hotel()

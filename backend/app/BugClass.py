@@ -10,12 +10,12 @@ class Environment(Enum):
     OVERGROUND = "Overground"
 
 class Bug:
-    def __init__(self, species: str, budget: int, preyOrPredator:PreyOrPredator, canFly: bool, aggression: int, preferredEnvironment:Environment, size: int):
+    def __init__(self, species: str, budget: int, preyOrPredator:PreyOrPredator, canFly: bool, aggression: int, prefferedEnvironment:Environment, size: int):
         self.species = species
         self.budget = budget
         self.canFly = canFly
         self.preyOrPredator = preyOrPredator
-        self.prefferedEnvironment = preferredEnvironment
+        self.prefferedEnvironment = prefferedEnvironment
         self.aggression = aggression
         self.size = size
  
@@ -66,7 +66,7 @@ class Spider(Bug):
             aggression=10,
             canFly=False,
             size=size,
-            preferredEnvironment=Environment.OVERGROUND
+            prefferedEnvironment=Environment.OVERGROUND
         )
 
 class Ant(Bug):
@@ -80,7 +80,7 @@ class Ant(Bug):
             aggression=3,
             canFly=False,
             size=size,
-            preferredEnvironment=Environment.UNDERGROUND
+            prefferedEnvironment=Environment.UNDERGROUND
         )
 
 class Beetle(Bug):
@@ -94,7 +94,7 @@ class Beetle(Bug):
             aggression=2,
             canFly=random.choice([True, False]),
             size=size,
-            preferredEnvironment=Environment.OVERGROUND
+            prefferedEnvironment=Environment.OVERGROUND
         )
 
 class Fly(Bug):
@@ -108,7 +108,7 @@ class Fly(Bug):
             aggression=1,
             canFly=True,
             size=size,
-            preferredEnvironment=Environment.OVERGROUND
+            prefferedEnvironment=Environment.OVERGROUND
         )
 
 class Worm(Bug):
@@ -122,7 +122,7 @@ class Worm(Bug):
             aggression=1,
             canFly=False,
             size=size,
-            preferredEnvironment=Environment.UNDERGROUND
+            prefferedEnvironment=Environment.UNDERGROUND
         )
 
 class Bee(Bug):
@@ -136,7 +136,7 @@ class Bee(Bug):
             aggression=5,
             canFly=True,
             size=size,
-            preferredEnvironment=Environment.OVERGROUND
+            prefferedEnvironment=Environment.OVERGROUND
         )
 
 class Wasp(Bug):
@@ -150,7 +150,7 @@ class Wasp(Bug):
             aggression=7,
             canFly=True,
             size=size,
-            preferredEnvironment=Environment.OVERGROUND
+            prefferedEnvironment=Environment.OVERGROUND
         )
 
 class Caterpillar(Bug):
@@ -164,7 +164,7 @@ class Caterpillar(Bug):
             aggression=2,
             canFly=False,
             size=size,
-            preferredEnvironment=Environment.OVERGROUND
+            prefferedEnvironment=Environment.OVERGROUND
         )
 
 class Butterfly(Bug):
@@ -178,7 +178,7 @@ class Butterfly(Bug):
             aggression=1,
             canFly=True,
             size=size,
-            preferredEnvironment=Environment.OVERGROUND
+            prefferedEnvironment=Environment.OVERGROUND
         )
 
 class Moth(Bug):
@@ -192,7 +192,7 @@ class Moth(Bug):
             aggression=3,
             canFly=True,
             size=size,
-            preferredEnvironment=Environment.OVERGROUND
+            prefferedEnvironment=Environment.OVERGROUND
         )
 
 class Grasshopper(Bug):
@@ -206,7 +206,7 @@ class Grasshopper(Bug):
             aggression=9,
             canFly=False,
             size=size,
-            preferredEnvironment=Environment.OVERGROUND
+            prefferedEnvironment=Environment.OVERGROUND
         )
 
 class Mosquito(Bug):
@@ -220,5 +220,5 @@ class Mosquito(Bug):
             aggression=10,
             canFly=True,
             size=size,
-            preferredEnvironment=Environment.OVERGROUND
+            prefferedEnvironment=Environment.OVERGROUND
         )

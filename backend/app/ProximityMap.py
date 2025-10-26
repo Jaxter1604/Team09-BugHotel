@@ -34,6 +34,12 @@ def compute_heatmaps(hotel):
                 if getattr(room, "occupiedBy", None) is not None:
                     occs.append(room.occupiedBy)
 
+            for occ in occs:
+                if occ.preyOrPredator == PreyOrPredator.PREDATOR:
+                    predators.append((r, c, occ.aggression))
+                elif occ.preyOrPredator == PreyOrPredator.PREY:
+                        prey.append((r, c))
+
     for predrow, predcol, aggression in predators:
         radius = radius_from_aggression(aggression)
         if radius == 0:
@@ -56,4 +62,5 @@ def compute_heatmaps(hotel):
                 if d <= radius:
                     predator_bonus[r][c] += PREDATOR_BONUS_WEIGHT * decay(d)
 
+    print(prey_penalty)
     return prey_penalty, predator_bonus

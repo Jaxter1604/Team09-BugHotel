@@ -1,5 +1,5 @@
 export default async function getHotelJSON() {
-    let response = await fetch("/hotel");
+    let response = await fetch("http://localhost:8000/hotel");
 
     if (!response.ok) {
         throw new Error(`Response status ${response.status}`);

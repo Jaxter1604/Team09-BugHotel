@@ -13,6 +13,16 @@ app = FastAPI(title="Bug Hotel")
 app.state.room_num = None
 app.state.input_event = asyncio.Event()
 
+from fastapi.middleware.cors import CORSMiddleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"], # here
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
 
 async def get_room_num(request: Request):
     data = await request.json()

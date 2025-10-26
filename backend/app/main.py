@@ -5,6 +5,7 @@ from BugClass import *
 from HotelClass import Hotel
 from RoomClass import Room
 from BugQueue import generate_queue
+from fastapi.middleware.cors import CORSMiddleware
 
 MAX_BUGS = 35
 
@@ -16,7 +17,7 @@ origins = [
     "http://localhost.tiangolo.com",
     "https://localhost.tiangolo.com",
     "http://localhost",
-    "http://localhost:8080",
+    "http://localhost:80000",
     "http://localhost:5173"
 ]
 

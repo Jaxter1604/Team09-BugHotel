@@ -1,27 +1,25 @@
 import '../App.css'
 
-import background from '../assets/static/media/background.png'
 import Bug from './Bug.tsx'
 import Hotel from './Hotel.tsx'
-import {useState, useEffect} from 'react'
+import {useState, useEffect, ReactElement} from 'react'
+import {bugHashmap} from '../assets/static/Bugs.tsx'
 
-//All sprites
-import ant from '../assets/static/media/sprites/ant.png'
-import beetle from '../assets/static/media/sprites/beetle.png'
-import fly from '../assets/static/media/sprites/fly.png'
-import worm from '../assets/static/media/sprites/worm.png'
-import bee from '../assets/static/media/sprites/bee.png'
-import wasp from '../assets/static/media/sprites/wasp.png'
-import caterpiller from '../assets/static/media/sprites/caterpiller.png'
-import butterfly from '../assets/static/media/sprites/butterfly.png'
-import moth from '../assets/static/media/sprites/moth.png'
-import grasshopper from '../assets/static/media/sprites/grasshopper.png'
-import mosquito from '../assets/static/media/sprites/mosquito.png'
-import spider from '../assets/static/media/sprites/spider.png'
+type BugEl = {
+  bug: string,
+  x: number,
+  y: number
+}
 
+const bugElements: BugEl[] = []
+
+var c:number=0;
 
 export default function Simulation() {
           const [spriteClock,setSpriteClock] = useState(0)
+
+          const [testx,settestx] = useState(0)
+          const [testy,settesty] = useState(0)
           useEffect(() => {
             const interval = setInterval(() => {
               if (spriteClock==0){
@@ -29,23 +27,50 @@ export default function Simulation() {
               } else {
                 setSpriteClock(0)
               }
+              c+=1
+              if (c==10){
+                settestx(255)
+                settesty(195)
+              }
             }, 200)
         
             return () => clearInterval(interval)
           })
+          const mappedBugElements:ReactElement[] = []
+          for (const [key, value] of Object.entries(bugElements)) {
+              mappedBugElements.push(<Bug spriteURL={bugHashmap[value.bug]} spriteClock={spriteClock} mode={0} x={value.x} y={value.y}/>);
+          }
     return (
         <>
             <div id="simulatorBoxBlock" className="flex">
                 <div id="simulatorBox">
                     <div id="background" className="sprite">
-                        <Bug spriteURL={ant} spriteClock={spriteClock} mode={0} x={0} y={0}/>
-                        <Bug spriteURL={beetle} spriteClock={spriteClock} mode={0} x={36} y={0}/>
-                        <Bug spriteURL={grasshopper} spriteClock={spriteClock} mode={0} x={72} y={0}/>
+                        {mappedBugElements}
                         <Hotel/>
                     </div>
                 </div>
             </div>
         </>
-
     )
+}
+
+interface addNewBugProps {
+  uniqueID: number,
+  bug: string,
+  x: number,
+  y: number
+}
+
+export function addNewBug({uniqueID,bug,x,y}:addNewBugProps) {
+  bugElements[uniqueID]=({bug:bug,x:x,y:y})
+}
+
+interface setBugIntegerVariableProps {
+  uniqueID: number,
+  variable: string,
+  newValue: number,
+}
+
+export function setBugIntegerVariable({uniqueID,variable,newValue}:setBugIntegerVariableProps){
+  bugElements[uniqueID][variable]=newValue
 }

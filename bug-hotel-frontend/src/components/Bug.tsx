@@ -19,7 +19,7 @@ export default function Bug({spriteURL, spriteClock, mode, x, y}: spriteProps) {
     const newx=useRef(-1)
     const newy=useRef(-1)
 
-    let scaleVal:string="scale(1)"
+    let scaleVal="scale(1)"
 
     useEffect(() => {
         //Just created, initialise and don't edit until x or y is different
@@ -74,7 +74,6 @@ export default function Bug({spriteURL, spriteClock, mode, x, y}: spriteProps) {
         }
     });
 
-    console.log(scaleVal)
     const px:number=(35*2*(spriteClock))+(35*4*mode)
     return (
         <>

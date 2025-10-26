@@ -5,6 +5,9 @@ import Hotel from './Hotel.tsx'
 import {useState, useEffect, ReactElement} from 'react'
 import {bugHashmap} from '../assets/static/Bugs.tsx'
 
+import getQueueArray from '../Scripts/getQueueArray.ts'
+import getHotelData from '../Scripts/getHotelData.ts'
+
 type BugEl = {
   bug: string,
   x: number,
@@ -23,7 +26,7 @@ export default function Simulation() {
                 setSpriteClock(0)
               }
             }, 180)
-        
+
             return () => clearInterval(interval)
           })
           const mappedBugElements:ReactElement[] = []
@@ -64,3 +67,15 @@ interface setBugIntegerVariableProps {
 export function setBugIntegerVariable({uniqueID,variable,newValue}:setBugIntegerVariableProps){
   bugElements[uniqueID][variable]=newValue
 } //Function to control their movement, how they move is coded elsewhere.
+
+export async function parseQueue(){
+    const data = await getQueueArray()
+    for (let i=0;i<data.length;i++){
+        console.log(data[i])
+    }
+}
+
+addNewBug({uniqueID:1,bug:"Caterpillar",x:0,y:0})
+setBugIntegerVariable({uniqueID:1,variable:"x",newValue: 300})
+setBugIntegerVariable({uniqueID:1,variable:"y",newValue: 350})
+parseQueue()

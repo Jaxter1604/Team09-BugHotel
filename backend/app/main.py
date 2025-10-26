@@ -6,6 +6,8 @@ from HotelClass import Hotel
 from RoomClass import Room
 from BugQueue import generate_queue
 from fastapi.middleware.cors import CORSMiddleware
+import aioconsole
+from time import sleep
 
 MAX_BUGS = 35
 
@@ -24,15 +26,15 @@ app.add_middleware(
 
 
 
-async def get_room_num(request: Request):
-    data = await request.json()
-    room_num = app.state.room_num = data.get("room_num")
-    app.state.input_event.set()
-    return {"status": "received", "room_num": room_num}
+async def get_room_num():
+    room_num = await aioconsole.ainput("Enter room number\n")
+    return room_num
+
+
 
 @app.on_event("startup")
 async def start_game():
-    asyncio.create_task(game())
+    room_num = await asyncio.create_task(game())
     
 
 async def game():
@@ -49,27 +51,12 @@ async def game():
                 "preyOrPredator" : fn_current_bug.value.preyOrPredator,
                 "prefferedEnvironment" : fn_current_bug.value.prefferedEnvironment,
                 "agression" : fn_current_bug.value.prefferedEnvironment,
-                "size" : fn_current_bug.value.size
+                "size" : fn_current_bug.value.size,
+                "roomNo" : fn_current_bug.room_num
                 })
             fn_current_bug = fn_current_bug.next
 
         return {"queue" : queue_list}
-
-    @app.get("/hotel")
-    def get_hotel_data():
-        room_info = []
-        for room_no in range(1, hotel.max_room_num+1):
-            room_row, room_col = hotel.find_room_coords(room_no)
-            currentRoom = hotel.grid[room_row][room_col]
-            room_info.append({
-                "size" : currentRoom.size,
-                "environment" : currentRoom.environment,
-                "accessibility" : currentRoom.accessibility,
-                "occupiedBy" : currentRoom.occupiedBy,
-                "cost" : currentRoom.cost,
-                "roomNo" : currentRoom.roomNo
-            })
-        return {"room_info" : room_info}
 
     @app.get("/score")
     def get_score():
@@ -92,13 +79,13 @@ async def game():
         while True:
             try:
                 print("getting input")
-                await app.state.input_event.wait()
-  
-                room_num = app.state.room_num
-                room_coords = hotel.find_room_coords(room_num)
-                app.state.input_event.clear()
+
+                room_num = await get_room_num()
+
+                room_coords = hotel.find_room_coords(int(room_num))
+                asyncio.sleep(0.1)
                 if hotel.add_bug_to_room(currentBug.value, room_coords[0], room_coords[1]):
-                    break
+                    currentBug.roomNo = room_num
             except ValueError:
                 print("Please enter a room number between 1 and 35, that is not occupied")
         currentBug=currentBug.next

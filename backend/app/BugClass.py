@@ -18,6 +18,7 @@ class Bug:
         self.prefferedEnvironment = prefferedEnvironment
         self.aggression = aggression
         self.size = size
+        self.roomNo = -1
  
     def genRandomBug(self):
         Bugs = [Ant,Beetle,Fly,Worm,

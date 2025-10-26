@@ -2,6 +2,43 @@ import random
 from BugClass import Ant, Beetle, Fly, Worm, Bee, Wasp, Caterpillar, Butterfly, Moth, Grasshopper, Mosquito, Spider
 from BugClass import PreyOrPredator
 
+class QueueNode:
+    def __init__(self,value,position):
+        self.value=value
+        self.position=position
+        self.next=None
+
+    def increasePosition(self):
+        if not self.next is None:
+            self.next.increasePosition(self.next)
+        self.position-=1
+        #In react they adjust their position accordingly
+
+class BugQueue:
+    def __init__(self):
+        self.head=None
+        self.last=self.head
+        self.length=-1
+
+    def addNode(self,newNode):
+        if self.head is None:
+            self.head=newNode
+            self.last=self.head
+        else:
+            self.last.next=newNode
+            self.last=self.last.next
+        self.length+=1
+        #In react, bug added to next spot in list, they spawn from off screen and walk to (100- 35*length)x, 0 y
+
+    def pop(self):
+        if not self.head is None:
+            returnNode=self.head.value
+            self.head=self.head.next
+            self.head.increasePosition(self.head)
+            self.length-=1
+            return returnNode #Negative/-1 length is empty
+            #Whenever room allocation starts, first queue member popped
+
 def generate_queue(num_bugs: int, pred_ratio: float = 0.25):
     
     bugs = [Ant, Spider, Beetle, Fly, Bee, Wasp, Worm, Caterpillar, Grasshopper, Moth, Mosquito, Butterfly]
@@ -10,19 +47,20 @@ def generate_queue(num_bugs: int, pred_ratio: float = 0.25):
     prey = [prey for prey in bugs if prey().preyOrPredator == PreyOrPredator.PREY]
 
     num_pred = int(num_bugs * pred_ratio)
-    num_prey = num_bugs - num_pred
 
-    bug_queue = []
+    pred_indexes=set(random.sample(range(0, num_bugs), num_pred))
 
-    for i in range(num_pred):
-        BugClass = random.choice(predators)
-        bug_queue.append(BugClass())
+    bug_queue = BugQueue()
 
-    for i in range(num_prey):
-        BugClass = random.choice(prey)
-        bug_queue.append(BugClass())
+    for i in range(0,num_bugs):
+        if i in pred_indexes:
+            BugClass = random.choice(predators)
+            bug_queue.addNode(QueueNode(BugClass(),bug_queue.length+1))
+        else:
+            BugClass = random.choice(prey)
+            bug_queue.addNode(QueueNode(BugClass(),bug_queue.length+1))
 
-    random.shuffle(bug_queue)
+    #random.shuffle(bug_queue)
     return bug_queue
 
 

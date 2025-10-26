@@ -19,6 +19,8 @@ export default function Bug({spriteURL, spriteClock, mode, x, y}: spriteProps) {
     const newx=useRef(-1)
     const newy=useRef(-1)
 
+    var scaleVal:string="scale(1)"
+
     useEffect(() => {
         //Just created, initialise and don't edit until x or y is different
         if (newx.current==-1 || newy.current==-1) {
@@ -32,8 +34,17 @@ export default function Bug({spriteURL, spriteClock, mode, x, y}: spriteProps) {
             }
         } else {
         //System to move bugs incremently to new x,y coordinate. First go to x coordinate then y coordinate.
-            if (newx.current<x){
+            if (newy.current>yOffset-y) {
+                scaleVal="scale(-1,1)"
                 mode=1
+                console.log("d")
+                if ((newy.current-speed)<yOffset-y){
+                    newy.current=(yOffset-y)
+                } else {
+                    newy.current=(newy.current-speed)
+            }} else if (newx.current<x){
+                mode=1
+                scaleVal="scale(1)"
                 console.log("a")
                 if ((newx.current+speed)>x){
                     newx.current=(x)
@@ -42,13 +53,15 @@ export default function Bug({spriteURL, spriteClock, mode, x, y}: spriteProps) {
                 }
             } else if (newx.current>x) {
                 mode=1
+                scaleVal="scale(-1,1)"
                 console.log("b")
                 if ((newx.current-speed)<x){
                     newx.current=(x)
                 } else {
-                    newx.current=(x+speed)
+                    newx.current=(newx.current-speed)
                 }
             } else if (newy.current<yOffset-y){
+                scaleVal="scale(1)"
                 mode=1
                 console.log("c")
                 if ((newy.current+speed)>yOffset-y){
@@ -56,22 +69,15 @@ export default function Bug({spriteURL, spriteClock, mode, x, y}: spriteProps) {
                 } else {
                     newy.current=(newy.current+speed)
                 }
-            } else if (newy.current>yOffset-y) {
-                mode=1
-                console.log("d")
-                if ((newy.current-speed)<yOffset-y){
-                    newy.current=(yOffset-y)
-                } else {
-                    newy.current=(newy.current-speed)
-                }}
+            }
         }
     });
-
+    console.log(scaleVal)
     const px:number=(35*2*(spriteClock))+(35*4*mode)
     return (
         <>
             <div style={{width: "35px", height: "35px"}}>
-                    <div id="bugSprite" style={{right:newx.current+"px",top:newy.current+"px"}}>
+                    <div id="bugSprite" style={{right:newx.current+"px",top:newy.current+"px",transform:scaleVal}}>
                         <img src={spriteURL} id="bugImg" className="sprite" style={{right: px + 'px'}} />
                     </div>
             </div>

@@ -13,13 +13,8 @@ type BugEl = {
 
 const bugElements: BugEl[] = []
 
-var c:number=0;
-
 export default function Simulation() {
           const [spriteClock,setSpriteClock] = useState(0)
-
-          const [testx,settestx] = useState(0)
-          const [testy,settesty] = useState(0)
           useEffect(() => {
             const interval = setInterval(() => {
               if (spriteClock==0){
@@ -27,12 +22,7 @@ export default function Simulation() {
               } else {
                 setSpriteClock(0)
               }
-              c+=1
-              if (c==10){
-                settestx(255)
-                settesty(195)
-              }
-            }, 200)
+            }, 180)
         
             return () => clearInterval(interval)
           })
@@ -74,3 +64,8 @@ interface setBugIntegerVariableProps {
 export function setBugIntegerVariable({uniqueID,variable,newValue}:setBugIntegerVariableProps){
   bugElements[uniqueID][variable]=newValue
 }
+
+addNewBug({uniqueID:1,bug:"Ant",x:100,y:0})
+addNewBug({uniqueID:2,bug:"Butterfly",x:65,y:0})
+addNewBug({uniqueID:3,bug:"Bee",x:30,y:0})
+addNewBug({uniqueID:4,bug:"Beetle",x:-5,y:0})

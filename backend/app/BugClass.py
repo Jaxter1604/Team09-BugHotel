@@ -88,7 +88,7 @@ class Beetle(Bug):
         budget = random.randrange(50,201,10)
         size = random.randrange(3,7)
         super().__init__(
-            species="Beettle",
+            species="Beetle",
             budget=budget,
             preyOrPredator=PreyOrPredator.PREY,
             aggression=2,

@@ -19,7 +19,7 @@ export const bugHashmap: {[key: string] : string} = {
   "Worm":worm,
   "Bee":bee,
   "Wasp":wasp,
-  "Caterpiller":caterpiller,
+  "Caterpillar":caterpiller,
   "Butterfly":butterfly,
   "Moth":moth,
   "Grasshopper":grasshopper,

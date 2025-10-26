@@ -30,8 +30,7 @@ async def game():
     def get_queue():    
         queue_list = []
         fn_current_bug = currentBug #don't want to screw over main loop's iteration
-        index = 0
-        while (fn_current_bug != None and index <= MAX_BUGS):
+        while (fn_current_bug != None):
             queue_list.append({
                 "species" : fn_current_bug.value.species,
                 "budget" : fn_current_bug.value.budget,
@@ -44,6 +43,22 @@ async def game():
             fn_current_bug = fn_current_bug.next
 
         return {"queue" : queue_list}
+
+    @app.get("/hotel")
+    def get_hotel_data():
+        room_info = []
+        for room_no in range(1, hotel.max_room_num+1):
+            room_row, room_col = hotel.find_room_coords(room_no)
+            currentRoom = hotel.grid[room_row][room_col]
+            room_info.append({
+                "size" : currentRoom.size,
+                "environment" : currentRoom.environment,
+                "accessibility" : currentRoom.accessibility,
+                "occupiedBy" : currentRoom.occupiedBy,
+                "cost" : currentRoom.cost,
+                "roomNo" : currentRoom.roomNo
+            })
+        return {"room_info" : room_info}
 
     hotel = Hotel()
     bugs = generate_queue(MAX_BUGS)

@@ -44,7 +44,7 @@ def get_queue():
             "canFly" : fn_current_bug.value.canFly,
             "preyOrPredator" : fn_current_bug.value.preyOrPredator,
             "prefferedEnvironment" : fn_current_bug.value.prefferedEnvironment,
-            "agression" : fn_current_bug.value.prefferedEnvironment,
+            "agression" : fn_current_bug.value.aggression,
             "size" : fn_current_bug.value.size,
             "roomNo" : fn_current_bug.value.roomNo
             })

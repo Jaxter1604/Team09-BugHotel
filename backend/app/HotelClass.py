@@ -1,6 +1,7 @@
 from RoomClass import Room
 from BugClass import Bug
 from HappinessCalc import CalcHappiness
+from ProximityMap import compute_heatmaps
 
 class Hotel:
     def __init__(self, rows=7, cols=5):
@@ -29,11 +30,12 @@ class Hotel:
         return True
 
     def recalc_all_happiness(self):
+        prey_penalty, pred_bonus = compute_heatmaps(self)
         for row in self.grid:
             for room in row:
                 if room.occupiedBy:
                     bug = room.occupiedBy
-                    bug.happiness = CalcHappiness(bug, room)
+                    bug.happiness = CalcHappiness(bug, room, prey_penalty, pred_bonus)
 
     def FinalAverage(self):
         total = 0

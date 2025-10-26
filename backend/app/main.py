@@ -53,7 +53,7 @@ def get_queue():
     return {"queue" : queue_list}
 
 def get_console_input():
-    return input("Enter room, bitch")
+    return input("Enter room number \n")
 
 @app.on_event("startup")
 async def start_game():

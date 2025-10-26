@@ -13,7 +13,6 @@ def CalcHappiness(bug: Bug, room: Room, prey_penalty, pred_bonus):
     else:
         agro = prey_penalty[room.position[0]][room.position[1]]
 
-    # agro = calcAgro(Room,Bug)
     if bug.canFly:
         access = 1
     elif bug.prefferedEnvironment == Environment.UNDERGROUND:

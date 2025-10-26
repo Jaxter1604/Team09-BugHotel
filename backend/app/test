@@ -1,0 +1,15 @@
+for r in range(rows):
+    for c in range(cols):
+        room = hotel.grid[r][c]
+        occs = getattr(room, "occupied", None)
+        if occs is None:
+            occs = []
+            if getattr(room, "occupiedBy", None) is not None:
+                occs.append(room.occupiedBy)
+
+        for occ in occs:
+            if isinstance(occ, PreyOrPredator):
+                if occ.is_predator:
+                    predators.append((r, c, occ.aggression))
+                elif occ.is_prey:
+                    prey.append((r, c))

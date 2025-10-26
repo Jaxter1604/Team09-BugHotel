@@ -60,6 +60,10 @@ async def game():
             })
         return {"room_info" : room_info}
 
+    @app.get("/score")
+    def get_score():
+        return {"score": hotel.FinalAverage()}
+
     hotel = Hotel()
     bugs = generate_queue(MAX_BUGS)
 

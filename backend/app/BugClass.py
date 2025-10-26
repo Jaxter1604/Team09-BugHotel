@@ -10,13 +10,13 @@ class Environment(Enum):
     OVERGROUND = "Overground"
 
 class Bug:
-    def __init__(self, species: str, budget: int, preyOrPredator:PreyOrPredator, canFly: bool, agression: int, preferredEnvironment:Environment, size: int):
+    def __init__(self, species: str, budget: int, preyOrPredator:PreyOrPredator, canFly: bool, aggression: int, preferredEnvironment:Environment, size: int):
         self.species = species
         self.budget = budget
         self.canFly = canFly
         self.preyOrPredator = preyOrPredator
         self.prefferedEnvironment = preferredEnvironment
-        self.agression = agression
+        self.aggression = aggression
         self.size = size
  
     def genRandomBug(self):
@@ -63,7 +63,7 @@ class Spider(Bug):
             species="Spider",
             budget=budget,
             preyOrPredator=PreyOrPredator.PREDATOR,
-            agression=10,
+            aggression=10,
             canFly=False,
             size=size,
             preferredEnvironment=Environment.OVERGROUND
@@ -77,7 +77,7 @@ class Ant(Bug):
             species="Ant",
             budget=budget,
             preyOrPredator=PreyOrPredator.PREY,
-            agression=3,
+            aggression=3,
             canFly=False,
             size=size,
             preferredEnvironment=Environment.UNDERGROUND
@@ -91,7 +91,7 @@ class Beetle(Bug):
             species="Beettle",
             budget=budget,
             preyOrPredator=PreyOrPredator.PREY,
-            agression=2,
+            aggression=2,
             canFly=random.choice([True, False]),
             size=size,
             preferredEnvironment=Environment.OVERGROUND
@@ -105,7 +105,7 @@ class Fly(Bug):
             species="Fly",
             budget=budget,
             preyOrPredator=PreyOrPredator.PREY,
-            agression=1,
+            aggression=1,
             canFly=True,
             size=size,
             preferredEnvironment=Environment.OVERGROUND
@@ -119,7 +119,7 @@ class Worm(Bug):
             species="Worm",
             budget=budget,
             preyOrPredator=PreyOrPredator.PREY,
-            agression=1,
+            aggression=1,
             canFly=False,
             size=size,
             preferredEnvironment=Environment.UNDERGROUND
@@ -133,7 +133,7 @@ class Bee(Bug):
             species="Bee",
             budget=budget,
             preyOrPredator=PreyOrPredator.PREY,
-            agression=5,
+            aggression=5,
             canFly=True,
             size=size,
             preferredEnvironment=Environment.OVERGROUND
@@ -147,7 +147,7 @@ class Wasp(Bug):
             species="Wasp",
             budget=budget,
             preyOrPredator=PreyOrPredator.PREDATOR,
-            agression=7,
+            aggression=7,
             canFly=True,
             size=size,
             preferredEnvironment=Environment.OVERGROUND
@@ -161,7 +161,7 @@ class Caterpillar(Bug):
             species="Caterpillar",
             budget=budget,
             preyOrPredator=PreyOrPredator.PREY,
-            agression=2,
+            aggression=2,
             canFly=False,
             size=size,
             preferredEnvironment=Environment.OVERGROUND
@@ -175,7 +175,7 @@ class Butterfly(Bug):
             species="Butterfly",
             budget=budget,
             preyOrPredator=PreyOrPredator.PREY,
-            agression=1,
+            aggression=1,
             canFly=True,
             size=size,
             preferredEnvironment=Environment.OVERGROUND
@@ -189,7 +189,7 @@ class Moth(Bug):
             species="Moth",
             budget=budget,
             preyOrPredator=PreyOrPredator.PREY,
-            agression=3,
+            aggression=3,
             canFly=True,
             size=size,
             preferredEnvironment=Environment.OVERGROUND
@@ -203,7 +203,7 @@ class Grasshopper(Bug):
             species="Grasshopper",
             budget=budget,
             preyOrPredator=PreyOrPredator.PREDATOR,
-            agression=9,
+            aggression=9,
             canFly=False,
             size=size,
             preferredEnvironment=Environment.OVERGROUND
@@ -217,7 +217,7 @@ class Mosquito(Bug):
             species="Mosquito",
             budget=budget,
             preyOrPredator=PreyOrPredator.PREDATOR,
-            agression=10,
+            aggression=10,
             canFly=True,
             size=size,
             preferredEnvironment=Environment.OVERGROUND
